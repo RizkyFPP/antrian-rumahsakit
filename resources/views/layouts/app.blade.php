@@ -16,6 +16,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+      {{-- Flatpickr CSS (tema dark agar seragam) --}}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 </head>
 
 <body class="antialiased bg-[#013114] text-white flex flex-col min-h-screen">
@@ -29,7 +32,7 @@
         <ul class="flex space-x-8">
             <li><a href="{{ route('home') }}" class="hover:text-green-300 transition">Home</a></li>
             <li><a href="{{ route('antrian') }}" class="hover:text-green-300 transition">Cek Antrian</a></li>
-            <li><a href="#" class="hover:text-green-300 transition">Daftar Online</a></li>
+            <li><a href="{{ route('daftar-online') }}" class="hover:text-green-300 transition">Daftar Online</a></li>
             <li><a href="#" class="hover:text-green-300 transition">Layanan</a></li>
         </ul>
     </nav>
@@ -58,6 +61,18 @@
             <a href="#" class="hover:text-green-400"><i class="fab fa-instagram"></i></a>
         </div>
     </footer>
+
+     {{-- Script Flatpickr --}}
+     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+     <script type="module">
+         flatpickr("#jadwal_konsultasi", {
+             dateFormat: "d F Y",
+             minDate: "today",
+             locale: { firstDayOfWeek: 1 },
+             disableMobile: true,
+             theme: "dark",
+         });
+     </script>
 
 </body>
 </html>

@@ -10,3 +10,7 @@ Route::get('/', function () {
 Route::get('/antrian', function () {
     return view('pages.antrian');
 })->name('antrian');
+
+Route::get('/daftar-online', function () {
+    return view('pages.daftar-online');
+})->name('daftar-online');
