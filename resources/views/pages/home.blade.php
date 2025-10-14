@@ -10,7 +10,7 @@
             <p class="text-lg text-gray-200">
                 Kurangi waktu tunggu dengan sistem antrian digital.
             </p>
-            <a href="{{ route('antrian') }}" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+            <a href="{{ route('cek.antrian') }}" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
                 Cek Antrian Sekarang <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>

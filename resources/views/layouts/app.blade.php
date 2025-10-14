@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Rumah Sakit - Antrian Online')</title>
 
-    <!--  Tailwind via Vite -->
+    {{-- Tailwind via Vite --}}
     @vite('resources/css/app.css')
 
-    <!--  Font Awesome -->
+    {{-- Font Awesome --}}
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -16,14 +16,19 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-      {{-- Flatpickr CSS (tema dark agar seragam) --}}
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+
+    {{-- Flatpickr CSS (tema dark agar seragam) --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+
+    {{-- SweetAlert2 dan Animate.css untuk efek alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body class="antialiased bg-[#013114] text-white flex flex-col min-h-screen">
 
-    <!--  Navbar -->
+    {{-- Navbar --}}
     <nav class="flex items-center justify-between px-12 py-6">
         <div class="flex items-center space-x-2">
             <i class="fa-solid fa-circle-plus text-3xl text-white-400"></i>
@@ -31,18 +36,18 @@
         </div>
         <ul class="flex space-x-8">
             <li><a href="{{ route('home') }}" class="hover:text-green-300 transition">Home</a></li>
-            <li><a href="{{ route('antrian') }}" class="hover:text-green-300 transition">Cek Antrian</a></li>
+            <li><a href="{{ route('cek.antrian') }}" class="hover:text-green-300 transition">Cek Antrian</a></li>
             <li><a href="{{ route('daftar-online') }}" class="hover:text-green-300 transition">Daftar Online</a></li>
             <li><a href="#" class="hover:text-green-300 transition">Layanan</a></li>
         </ul>
     </nav>
 
-    <!--  Konten Halaman -->
+    {{-- Konten Halaman --}}
     <main class="flex-1">
         @yield('content')
     </main>
 
-    <!--  Footer -->
+    {{-- Footer --}}
     <footer class="text-center py-8 text-gray-300">
         <div class="flex justify-center items-center gap-8 mb-3 text-sm">
             <div class="flex items-center gap-2">
@@ -62,17 +67,38 @@
         </div>
     </footer>
 
-     {{-- Script Flatpickr --}}
-     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-     <script type="module">
-         flatpickr("#jadwal_konsultasi", {
-             dateFormat: "d F Y",
-             minDate: "today",
-             locale: { firstDayOfWeek: 1 },
-             disableMobile: true,
-             theme: "dark",
-         });
-     </script>
+    {{-- Flatpickr JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="module">
+        flatpickr("#jadwal_konsultasi", {
+            dateFormat: "d F Y",
+            minDate: "today",
+            locale: { firstDayOfWeek: 1 },
+            disableMobile: true,
+            theme: "dark",
+        });
+    </script>
+
+    {{-- SweetAlert2 Alert --}}
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Pendaftaran Berhasil 🎉',
+                html: '<b>{{ session('success') }}</b><br><br>Silakan datang sesuai jadwal konsultasi Anda.',
+                icon: 'success',
+                confirmButtonText: 'Oke',
+                confirmButtonColor: '#16a34a',
+                background: '#f0fdf4',
+                color: '#065f46',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        </script>
+    @endif
 
 </body>
 </html>
