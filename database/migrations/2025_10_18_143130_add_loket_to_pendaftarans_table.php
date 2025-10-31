@@ -6,23 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
-        if (!Schema::hasColumn('pendaftarans', 'no_bpjs')) {
+        if (!Schema::hasColumn('pendaftarans', 'loket')) {
             Schema::table('pendaftarans', function (Blueprint $table) {
-                $table->string('no_bpjs', 30)->nullable()->after('nohp');
+                $table->string('loket')->nullable()->after('status');
             });
         }
     }
 
     public function down()
     {
-        if (Schema::hasColumn('pendaftarans', 'no_bpjs')) {
+        if (Schema::hasColumn('pendaftarans', 'loket')) {
             Schema::table('pendaftarans', function (Blueprint $table) {
-                $table->dropColumn('no_bpjs');
+                $table->dropColumn('loket');
             });
         }
     }

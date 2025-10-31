@@ -13,8 +13,14 @@ class Pendaftaran extends Model
         'nama',
         'nohp',
         'no_bpjs',
-        'nomor_antrian',
+        'nomor_antrian', // <-- wajib ada ini
         'tanggal',
-        'jam', // ✅ wajib ada
+        'jam',
+        'loket',
     ];
+
+    public function antrian()
+    {
+        return $this->hasOne(Antrian::class, 'pendaftaran_id');
+    }
 }

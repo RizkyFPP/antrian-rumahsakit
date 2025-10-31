@@ -8,20 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('pendaftarans', function (Blueprint $table) {
+        Schema::create('antrians', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nohp');
-            $table->string('no_bpjs')->nullable();
-            $table->date('jadwal_tanggal');
-            $table->time('jadwal_jam');
+            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->onDelete('cascade');
+            $table->string('nomor_antrian')->unique();
             $table->integer('loket');
+            $table->enum('status', ['menunggu', 'dipanggil', 'selesai'])->default('menunggu');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('pendaftarans');
+        Schema::dropIfExists('antrians');
     }
 };

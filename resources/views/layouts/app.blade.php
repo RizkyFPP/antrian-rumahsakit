@@ -17,11 +17,11 @@
       referrerpolicy="no-referrer"
     />
 
-    {{-- Flatpickr CSS (tema dark agar seragam) --}}
+    {{-- Flatpickr CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
 
-    {{-- SweetAlert2 dan Animate.css untuk efek alert --}}
+    {{-- SweetAlert2 & Animate.css --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
@@ -29,43 +29,40 @@
 <body class="antialiased bg-[#013114] text-white flex flex-col min-h-screen">
 
     {{-- Navbar --}}
-    <nav class="flex items-center justify-between px-12 py-6">
-        <div class="flex items-center space-x-2">
+    <nav class="flex items-center justify-between px-6 md:px-12 py-6 flex-wrap">
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
             <i class="fa-solid fa-circle-plus text-3xl text-white-400"></i>
-            <span class="font-bold text-lg text-white tracking-wide">RSU Syifa Medika Banjar</span>
+            <span class="font-bold text-lg md:text-xl text-white tracking-wide">RSU Syifa Medika Banjar</span>
         </div>
-        <ul class="flex space-x-8">
+
+        {{-- Tombol toggle menu untuk mobile --}}
+        <button id="menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        {{-- Menu --}}
+        <ul id="menu" class="hidden md:flex flex-col md:flex-row w-full md:w-auto space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left">
             <li><a href="{{ route('home') }}" class="hover:text-green-300 transition">Home</a></li>
             <li><a href="{{ route('cek.antrian') }}" class="hover:text-green-300 transition">Cek Antrian</a></li>
             <li><a href="{{ route('daftar-online') }}" class="hover:text-green-300 transition">Daftar Online</a></li>
-            <li><a href="#" class="hover:text-green-300 transition">Layanan</a></li>
+            {{-- <li><a href="#" class="hover:text-green-300 transition">Layanan</a></li> --}}
         </ul>
     </nav>
 
     {{-- Konten Halaman --}}
-    <main class="flex-1">
+    <main class="flex-1 px-4 sm:px-6 lg:px-12 py-6">
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    <footer class="text-center py-8 text-gray-300">
-        <div class="flex justify-center items-center gap-8 mb-3 text-sm">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>Jl. Kesehatan No. 123, Jakarta</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-phone"></i>
-                <span>(021) 12845678</span>
-            </div>
+    <footer class="text-center text-sm md:text-base py-4 bg-[#013114] mt-auto font-poppins tracking-wide">
+        <div class="font-semibold text-lg md:text-xl text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.8)]">
+          💡 SISTEM ANTRIAN RSU Syifa Medika Banjar
         </div>
-
-        <div class="flex justify-center gap-6 text-lg mt-2">
-            <a href="#" class="hover:text-green-400"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="hover:text-green-400"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="hover:text-green-400"><i class="fab fa-instagram"></i></a>
+        <div class="text-gray-300 text-xs md:text-sm mt-1">
+          © {{ date('Y') }}
         </div>
-    </footer>
+      </footer>    
 
     {{-- Flatpickr JS --}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -76,6 +73,14 @@
             locale: { firstDayOfWeek: 1 },
             disableMobile: true,
             theme: "dark",
+        });
+
+        // Toggle menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        menuBtn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
         });
     </script>
 

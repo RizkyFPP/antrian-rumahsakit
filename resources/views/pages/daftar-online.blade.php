@@ -3,8 +3,8 @@
 @section('title', 'Daftar Online - Rumah Sakit')
 
 @section('content')
-<section class="relative flex flex-col md:flex-row justify-between items-center px-6 md:px-20 py-16 bg-[#00270B] text-white overflow-hidden flex-grow">
-    <div class="absolute inset-0 bg-gradient-to-br from-[#00270B] via-[#00270B] to-[#00270B] opacity-90"></div>
+<section class="relative flex flex-col md:flex-row justify-between items-center px-6 md:px-20 py-16 bg-[#013114] text-white overflow-hidden flex-grow">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#013114] via-[#013114] to-[#013114] opacity-90"></div>
 
     {{-- Bagian kiri (form pendaftaran) --}}
     <div class="relative z-10 w-full md:w-1/2 max-w-md space-y-6">
@@ -21,25 +21,29 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
-                html: `{!! session('success') !!}`,
+                html: `{!! nl2br(e(session('success'))) !!}`, // tampilkan HTML dengan aman
                 showConfirmButton: false,
-                timer: 3000
+                timer: 3500,
+                background: '#012b10',
+                color: '#eafff9'
             });
         </script>
         @endif
 
+        {{-- Notifikasi error --}}
         @if (session('error'))
         <script>
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal!',
-                html: `{!! session('error') !!}`,
+                html: `{!! nl2br(e(session('error'))) !!}`,
                 confirmButtonColor: '#d33',
+                background: '#012b10',
+                color: '#fff'
             });
         </script>
         @endif
 
-        
         {{-- Form pendaftaran --}}
         <form action="{{ route('daftar-online.store') }}" method="POST"
               id="formDaftar"
@@ -94,14 +98,14 @@
             </div>
 
             {{-- Jadwal Konsultasi --}}
-            <div>
+            {{-- <div>
                 <label class="block text-sm font-medium mb-2 text-green-200">
                     Jadwal Konsultasi
                 </label>
 
-                <div class="flex flex-col md:flex-row gap-3">
+                <div class="flex flex-col md:flex-row gap-3"> --}}
                     {{-- Tanggal --}}
-                    <div class="relative w-full md:w-1/2">
+                    {{-- <div class="relative w-full md:w-1/2">
                         <i class="fa-solid fa-calendar-days absolute left-4 top-1/2 transform 
                                   -translate-y-1/2 text-green-400 z-10"></i>
                         <input 
@@ -112,10 +116,10 @@
                                    text-gray-300 focus:ring-2 focus:ring-green-500 outline-none 
                                    transition duration-200 cursor-pointer [color-scheme:dark]"
                         >
-                    </div>
+                    </div> --}}
 
                     {{-- Jam --}}
-                    <div class="relative w-full md:w-1/2">
+                    {{-- <div class="relative w-full md:w-1/2">
                         <i class="fa-solid fa-clock absolute left-4 top-1/2 transform 
                                   -translate-y-1/2 text-green-400 z-10"></i>
                         <input 
@@ -128,7 +132,7 @@
                         >
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Tombol Submit --}}
             <button
@@ -143,7 +147,7 @@
     {{-- Bagian kanan (gambar dokter) --}}
     <div class="relative z-10 w-full md:w-1/2 flex justify-center md:justify-start mt-10 md:mt-0">
         <div class="relative">
-            <div class="absolute inset-0 bg-[#00270B] rounded-full blur-3xl opacity-50"></div>
+            <div class="absolute inset-0 bg-[#013114] rounded-full blur-3xl opacity-50"></div>
             <img 
                 src="{{ asset('images/doctor.png') }}" 
                 alt="Dokter"
